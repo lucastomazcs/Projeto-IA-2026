@@ -8,7 +8,7 @@ Combinar custos do vendedor, taxas do canal e preços comparáveis para apresent
 
 ## Estado atual
 
-O frontend comercial em `frontend/` envia produto e custos à aplicação `streamlit_app.py`. O Streamlit está conectado aos cálculos de `backend/pricing.py` e exibe métricas e gráficos interativos. Os anúncios ainda são fictícios; banco de dados e modelo de IA permanecem para uma etapa posterior. Os cartões do HTML continuam como prévia ilustrativa; os resultados calculados aparecem no Streamlit.
+`streamlit_app.py` agora reúne a apresentação do Precifica, o formulário e os resultados na mesma tela. Ao clicar em **Prever preço**, a aplicação calcula e atualiza as métricas e gráficos logo abaixo do formulário. A landing page HTML em `frontend/` permanece como entrada visual opcional. Os anúncios ainda são fictícios; banco de dados e modelo de IA serão integrados depois.
 
 Para atender ao requisito acadêmico de IA essencial, a PoC deverá incluir uma tarefa de IA claramente delimitada — identificar e ranquear anúncios comparáveis a partir de título, marca, modelo e atributos — e avaliar essa tarefa com dados rotulados e uma linha de base simples. O cálculo financeiro continuará determinístico e auditável.
 
@@ -42,7 +42,7 @@ python -m streamlit run streamlit_app.py
 
 O Streamlit pode ser acessado diretamente em `http://localhost:8501`.
 
-O botão **Começar precificação** da página comercial leva ao formulário em `frontend/app.html`. Após preencher, **Calcular no Streamlit** envia os dados ao Streamlit. O destino está em `frontend/config.js`; configure uma URL HTTPS ao publicar o servidor Python.
+Na tela do Streamlit, preencha o produto e os custos e clique em **Prever preço**. Métricas e gráficos aparecem na mesma página, abaixo do formulário. Para abrir também a landing page, inicie o servidor opcional `node frontend/serve.cjs`.
 
 Para servir via HTTP, com Node.js e sem instalar dependências:
 

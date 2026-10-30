@@ -2,11 +2,11 @@
 
 ## Fluxo
 
-`frontend/index.html` → `frontend/app.html` → `streamlit_app.py` → `backend/pricing.py` → métricas e gráficos Plotly.
+`streamlit_app.py` reúne a apresentação, o formulário e os gráficos em uma única página. O fluxo é: formulário → **Prever preço** → métricas e gráficos abaixo do formulário.
 
-O frontend continua como apresentação comercial. Ao clicar em **Calcular no Streamlit**, os campos são enviados por parâmetros de URL para o endereço de `frontend/config.js`. O Streamlit valida os valores, preenche seu formulário e executa a primeira análise. Novos cálculos usam o formulário nativo do Streamlit.
+O formulário do Streamlit executa a previsão na mesma página e preserva os campos. A landing page HTML em `frontend/index.html` continua disponível como uma entrada visual opcional; o formulário integrado e os resultados ficam juntos na aplicação Streamlit.
 
-Não é uma API REST nem uma incorporação de Python no HTML. Os resultados são exibidos na página do Streamlit, não nos cartões ilustrativos da página HTML. Essa divisão permite usar formulários, estado de sessão e gráficos interativos nativos sem criar um backend HTTP adicional.
+Os cálculos e gráficos são executados pelo Streamlit com `backend/pricing.py`. O estado da última análise fica na sessão enquanto o usuário atualiza os campos e prevê novamente.
 
 ## Rodar localmente
 
@@ -30,13 +30,13 @@ Linux / macOS:
 .venv/bin/python -m streamlit run streamlit_app.py
 ```
 
-O Streamlit fica em `http://localhost:8501`. Em outro terminal:
+O Streamlit fica em `http://localhost:8501`. Preencha o formulário e selecione **Prever preço**. Resultado, comparação e gráficos são renderizados abaixo do formulário na mesma página. A landing page opcional fica em `http://127.0.0.1:4173`:
 
 ```bash
 node frontend/serve.cjs
 ```
 
-Abra `http://127.0.0.1:4173`, clique em **Começar precificação**, em **Usar exemplo** e em **Calcular no Streamlit**. Também é possível abrir o Streamlit diretamente.
+Abra `http://127.0.0.1:4173` para a apresentação ou `http://localhost:8501` para o fluxo integrado de previsão.
 
 ## Resultados
 
@@ -57,7 +57,7 @@ Não há banco de dados, IA, embeddings, similaridade calculada nem métricas de
 
 ## Publicar
 
-O Streamlit precisa de um servidor Python (por exemplo, Streamlit Community Cloud). Ao implantar o repositório, configure a entrada **streamlit_app.py** e instale **requirements.txt**. Depois substitua `streamlitUrl` em `frontend/config.js` pela URL HTTPS publicada, preservando eventual subcaminho.
+O Streamlit precisa de um servidor Python (por exemplo, Streamlit Community Cloud). Ao implantar o repositório, configure a entrada **streamlit_app.py** e instale **requirements.txt**. A página única de formulário e resultados passa a ser a aplicação publicada.
 
 O site estático hospedado no Sites não executa Streamlit. Atualizar o GitHub não publica automaticamente o servidor Python nem altera a prévia estática do Sites. O endereço `localhost:8501` funciona somente com o servidor local em execução.
 
