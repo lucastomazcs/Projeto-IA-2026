@@ -8,12 +8,14 @@ Combinar custos do vendedor, taxas do canal e preços comparáveis para apresent
 
 ## Estado atual
 
-Em definição. O plano inicial propõe regras de precificação como MVP e deixa modelos de IA para uma fase posterior. Para atender ao requisito acadêmico de IA essencial, a PoC deverá incluir no MVP uma tarefa de IA claramente delimitada — por exemplo, identificar e ranquear anúncios comparáveis a partir de título, marca, modelo e atributos — e avaliar essa tarefa com dados rotulados e uma linha de base simples. O cálculo financeiro continuará determinístico e auditável.
+O protótipo de frontend está disponível em `frontend/`, com página de apresentação comercial e tela de precificação. Os anúncios, preços e similaridades são exemplos fixos de interface; o frontend ainda não está integrado ao backend, a banco de dados ou a modelo de IA.
+
+Para atender ao requisito acadêmico de IA essencial, a PoC deverá incluir uma tarefa de IA claramente delimitada — identificar e ranquear anúncios comparáveis a partir de título, marca, modelo e atributos — e avaliar essa tarefa com dados rotulados e uma linha de base simples. O cálculo financeiro continuará determinístico e auditável.
 
 ## Estrutura
 
 - `backend/`: API e lógica da PoC.
-- `frontend/`: interface demonstrável (a definir).
+- `frontend/`: protótipo responsivo em HTML, CSS e JavaScript, com apresentação e tela de precificação.
 - `docs/`: requisitos, decisões e avaliação do plano.
 - `data/sample/`: dados sintéticos ou com licença de uso documentada.
 
@@ -26,6 +28,20 @@ Em definição. O plano inicial propõe regras de precificação como MVP e deix
 - Não alegar previsão de demanda ou causalidade sem validação adequada.
 
 ## Execução
+
+### Frontend
+
+Abra `frontend/index.html` no navegador. O botão **Começar precificação** leva à tela de exemplo em `frontend/app.html`.
+
+Para servir via HTTP, com Node.js e sem instalar dependências:
+
+```bash
+node frontend/serve.cjs
+```
+
+Acesse `http://127.0.0.1:4173`. Mais detalhes em [frontend/README.md](frontend/README.md).
+
+### Backend inicial
 
 O protótipo de cálculo inicial está em `backend/pricing.py` e não requer dependências externas.
 

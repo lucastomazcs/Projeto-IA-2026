@@ -1,0 +1,4 @@
+Ferramenta: image_gen integrada (sem CLI).
+Destino: dist/assets/empreendedora.png
+
+Use case: photorealistic-natural. Asset type: portrait website hero photograph, no graphics or text. A Brazilian woman small business owner in her early 30s with medium brown skin and curly dark hair, wearing a light blue cotton button-up shirt, seated at a clean counter of a small modern electronics shop. She is looking down at a dark tablet held naturally with both hands, with a subtle confident smile. Background shows softly blurred shelves with neutral electronics boxes and a small plant. Natural daylight, realistic skin texture, credible editorial commercial photography, calm bright atmosphere, cool neutral palette. Portrait composition approximately 4:5, waist up, subject slightly right of center, full head and hands visible. No brand logos, no watermark, no written text, no interface overlays. Save image for use in the current project.
