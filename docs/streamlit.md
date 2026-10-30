@@ -8,6 +8,8 @@ O formulário do Streamlit executa a previsão na mesma página e preserva os ca
 
 Os cálculos e gráficos são executados pelo Streamlit com `backend/pricing.py`. O estado da última análise fica na sessão enquanto o usuário atualiza os campos e prevê novamente.
 
+O projeto também oferece uma API FastAPI em `backend/main.py`, que usa o mesmo CSV e expõe busca, filtros, estatísticas e equivalentes. Para iniciar: `python -m uvicorn backend.main:app --reload`; a documentação interativa fica em `http://localhost:8000/docs`.
+
 ## Rodar localmente
 
 Requer Python 3.10+ e, para servir a página comercial, Node.js. Na raiz do repositório:
@@ -70,6 +72,6 @@ python -m unittest discover -s tests -v
 node tests/frontend-handoff.cjs
 ```
 
-Os testes verificam regra financeira, arredondamento, inviabilidade, ausência de equivalentes, validação dos parâmetros, envio do frontend e renderização das métricas/gráficos via Streamlit AppTest.
+Os testes verificam regra financeira, matching por produto, separação de JBL 510BT/520BT, rotas FastAPI sobre os CSVs, envio do frontend e renderização das métricas/gráficos via Streamlit AppTest.
 
 Referências oficiais: [formulários](https://docs.streamlit.io/develop/api-reference/execution-flow/st.form), [gráficos Plotly](https://docs.streamlit.io/develop/api-reference/charts/st.plotly_chart), [parâmetros de URL](https://docs.streamlit.io/develop/api-reference/caching-and-state/st.query_params).

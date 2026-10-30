@@ -4,19 +4,16 @@ import pandas as pd
 # Localiza a pasta backend
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Caminho do dataset
-CAMINHO_DATASET = BASE_DIR / "data" / "dataset_eletronicos.xlsx"
+# Fonte única do catálogo sintético usado também pelo Streamlit e pelo matching.
+CAMINHO_DATASET = BASE_DIR.parent / "data" / "sample" / "anuncios.csv"
 
 
 def carregar_anuncios():
     """
-    Lê os anúncios do arquivo Excel.
+    Lê os anúncios do CSV compartilhado com a aplicação Streamlit.
     """
 
-    df = pd.read_excel(
-        CAMINHO_DATASET,
-        sheet_name="Anuncios"
-    )
+    df = pd.read_csv(CAMINHO_DATASET)
 
     return df
 

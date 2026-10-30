@@ -18,6 +18,7 @@ O backend inclui uma linha de base de matching com TF-IDF de palavras e n-gramas
 - `data/sample/`: 492 anúncios, catálogo com 41 modelos e 3.483 pares rotulados.
 - `frontend/`: protótipo responsivo em HTML, CSS e JavaScript, com apresentação e tela de precificação.
 - `streamlit_app.py`: formulário Python, métricas e gráficos Plotly.
+- `backend/main.py`: API FastAPI para anúncios e consulta de equivalentes sobre os mesmos CSVs.
 - `tests/`: testes financeiros, de parâmetros, do handoff e da aplicação Streamlit.
 - `docs/`: requisitos, decisões e avaliação do plano.
 - `docs/matching_avaliacao.md`: protocolo, limiar e métricas por produto.
@@ -55,7 +56,15 @@ Acesse `http://127.0.0.1:4173`. Guia completo de execução, publicação e limi
 
 ### Backend inicial
 
-O protótipo de cálculo inicial está em `backend/pricing.py` e não requer dependências externas.
+Instale as dependências da raiz e inicie a API FastAPI:
+
+```bash
+python -m uvicorn backend.main:app --reload
+```
+
+Consulte `http://localhost:8000/docs` para experimentar as rotas. A rota `/anuncios/equivalentes` recebe produto, categoria e condição; o Streamlit chama a mesma função de matching diretamente.
+
+O cálculo financeiro está em `backend/pricing.py`.
 
 ```bash
 python backend/pricing.py

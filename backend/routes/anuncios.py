@@ -7,6 +7,7 @@ from backend.services.anuncios_service import (
 )
 
 from backend.services.comparacao_service import comparar_precos
+from backend.product_matching import match_product
 
 
 # Agrupa as rotas relacionadas aos anúncios
@@ -51,4 +52,17 @@ def filtrar(
         categoria=categoria,
         marca=marca
     )
+
+
+@router.get("/equivalentes")
+def equivalentes(
+    produto: str,
+    categoria: str | None = None,
+    condicao: str = "Novo",
+):
+    """Localiza e ranqueia anúncios equivalentes pelo catálogo local."""
+    resultado = match_product(produto, categoria or "", condicao)
+    if resultado["product"] is None:
+        raise HTTPException(status_code=404, detail=resultado["reason"])
+    return resultado
 
