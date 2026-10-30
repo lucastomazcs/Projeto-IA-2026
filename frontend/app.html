@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Precifica — Análise de preço</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<header><div class="header-inner"><a class="brand" href="./" aria-label="Precifica, voltar à apresentação"><span class="brand-symbol" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 17V8h5M10 17V5h5M15 17v-6h4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>precifica</a><nav aria-label="Navegação principal"><span class="nav-active" aria-current="page">Precificação</span><button id="help-open" type="button">Como funciona</button></nav><div class="account"><span class="account-label">Loja demonstração<small>Ambiente de apresentação</small></span><span class="avatar">LD</span></div></div></header>
+<main>
+<div class="breadcrumb">Operação <span>/</span> Precificação</div>
+<div class="page-title"><div><h1>Nova precificação</h1><p>Compare o mercado e encontre um preço que faça sentido para sua venda.</p></div><button class="button secondary" id="reset" type="button">Limpar formulário</button></div>
+<div class="prototype-banner"><span class="info-icon">i</span><p><strong>Conectado ao Streamlit</strong> Envie seus custos para calcular resultados e visualizar gráficos. Os anúncios usados na demonstração são fictícios.</p><span class="prototype">Demonstração</span></div>
+<div class="layout">
+<section class="panel form-panel"><div class="panel-heading"><div><span class="section-kicker">CONFIGURAÇÃO</span><h2>Produto e custos</h2><p>Comece pelas informações da sua venda.</p></div><button id="fill-example" class="text-button" type="button">Usar exemplo</button></div>
+<form id="product-form">
+<label for="product">Nome do produto</label><input id="product" name="product" placeholder="Ex.: Fone JBL Tune 510BT" maxlength="120" required>
+<div class="form-row"><div><label for="category">Categoria</label><select id="category"><option>Áudio e fones</option><option>Smartphones</option><option>Informática</option><option>Outros eletrônicos</option></select></div><div><label for="condition">Condição</label><select id="condition"><option>Novo</option><option>Usado</option></select></div></div>
+<hr><h3>Composição do preço <span>Valores em reais</span></h3>
+<label for="cost">Custo do produto</label><div class="affix"><span>R$</span><input id="cost" type="number" min="0" step="0.01" placeholder="0,00" required></div>
+<label for="shipping">Frete e outros custos</label><div class="affix"><span>R$</span><input id="shipping" type="number" min="0" step="0.01" placeholder="0,00" required></div>
+<div class="form-row"><div><label for="fees">Taxas de venda</label><div class="affix suffix"><input id="fees" type="number" min="0" max="99" step="0.1" placeholder="0" required><span>%</span></div></div><div><label for="margin">Margem desejada</label><div class="affix suffix"><input id="margin" type="number" min="0" max="99" step="0.1" placeholder="0" required><span>%</span></div></div></div>
+<button class="button primary" type="submit">Calcular no Streamlit <span aria-hidden="true">→</span></button>
+<p class="form-note">Os dados serão enviados à aplicação Streamlit para calcular resultados e gerar gráficos. Os cartões ao lado são apenas uma prévia ilustrativa.</p>
+</form></section>
+<div class="results">
+<section class="panel summary"><div class="panel-heading summary-heading"><div><span class="section-kicker">RESULTADO</span><h2>Prévia da precificação</h2></div><span class="tag">Exemplo ilustrativo</span></div>
+<div class="price-block"><div><span class="label">Preço de venda sugerido</span><strong class="price"><span class="currency">R$</span> 199<span class="cents">,90</span></strong><span class="price-caption">Referência de apresentação para JBL Tune 510BT</span></div><div class="price-context"><span class="context-label">POSICIONAMENTO</span><strong>Faixa competitiva</strong><p>Exemplo dentro da faixa de<br>preços dos anúncios abaixo.</p></div></div>
+<div class="summary-grid"><div><span class="label">Lucro por venda</span><strong>R$ 40,91</strong></div><div><span class="label">Margem estimada</span><strong>20,5%</strong></div><div><span class="label">Preço mínimo</span><strong>R$ 198,53</strong></div></div></section>
+<section class="panel competitors"><div class="panel-heading"><div><h2>Comparação de concorrentes</h2><p>Anúncios do mesmo modelo de produto</p></div><span class="count-badge">3 anúncios de exemplo</span></div>
+<div class="table-wrap"><table><thead><tr><th>Anúncio</th><th>Similaridade</th><th class="align-right">Preço</th></tr></thead><tbody>
+<tr><td><div class="listing"><span class="product-image" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M7 21v-6a9 9 0 0 1 18 0v6"/><rect x="5" y="17" width="6" height="10" rx="2"/><rect x="21" y="17" width="6" height="10" rx="2"/></svg></span><div>Fone JBL Tune 510BT Bluetooth<small>Loja exemplo A <b>·</b> Novo</small></div></div></td><td><span class="score">98%</span></td><td class="align-right">R$ 199,90</td></tr>
+<tr><td><div class="listing"><span class="product-image" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M7 21v-6a9 9 0 0 1 18 0v6"/><rect x="5" y="17" width="6" height="10" rx="2"/><rect x="21" y="17" width="6" height="10" rx="2"/></svg></span><div>JBL 510BT original com garantia<small>Loja exemplo B <b>·</b> Novo</small></div></div></td><td><span class="score">96%</span></td><td class="align-right">R$ 219,90</td></tr>
+<tr><td><div class="listing"><span class="product-image" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M7 21v-6a9 9 0 0 1 18 0v6"/><rect x="5" y="17" width="6" height="10" rx="2"/><rect x="21" y="17" width="6" height="10" rx="2"/></svg></span><div>Headphone JBL Tune 510BT lacrado<small>Loja exemplo C <b>·</b> Novo</small></div></div></td><td><span class="score">94%</span></td><td class="align-right">R$ 229,90</td></tr>
+</tbody></table></div><div class="table-footer">Títulos, valores e similaridades são exemplos estáticos de layout.</div></section>
+<details class="panel excluded"><summary>Modelo excluído da comparação <span>JBL Tune 520BT</span></summary><p>Exemplo: o JBL Tune 520BT é um modelo diferente do 510BT e não deve compor a referência de preço.</p></details>
+<p id="preview-status" class="preview-status" role="status"></p>
+</div></div>
+<footer><span><strong>precifica</strong> <span class="footer-divider">|</span> Precificação de eletrônicos</span><span>Protótipo de interface · 2026</span></footer>
+</main>
+<dialog id="help-dialog"><div class="dialog-heading"><h2>Como funciona a precificação</h2><button id="help-close" type="button" aria-label="Fechar explicação">×</button></div><ol><li><strong>Informe o produto</strong><p>Preencha o modelo, a condição e a categoria.</p></li><li><strong>Defina seus custos</strong><p>Informe aquisição, frete, taxas e margem desejada.</p></li><li><strong>Calcule no Streamlit</strong><p>O botão envia os campos para a aplicação Python, que apresenta cálculos e gráficos interativos.</p></li></ol><p class="dialog-note">O Streamlit precisa estar em execução no endereço configurado. Os cartões desta página são apenas uma prévia; banco de dados e IA ainda serão integrados.</p></dialog>
+<script src="config.js"></script><script src="app.js"></script></body></html>
