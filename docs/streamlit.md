@@ -51,9 +51,9 @@ As alterações dos campos no Streamlit só atualizam o resultado após enviar o
 
 ## Dados e limitações
 
-Os cálculos estão conectados ao backend, mas a fonte de anúncios permanece fictícia. Há apenas três exemplos para **JBL Tune 510BT / Áudio e fones / Novo**, ativados pela opção **Usar anúncios de exemplo**. Outro modelo, outra condição ou a opção desativada gera o cenário sem equivalentes. O 520BT nunca entra como equivalente ao 510BT neste exemplo.
+Os anúncios sintéticos do arquivo `data/sample/anuncios.csv` estão ligados ao cálculo. O catálogo reúne 41 modelos e 492 anúncios. A interface identifica produtos por categoria, marca e modelo; a similaridade de títulos é calculada com TF-IDF e cosseno, usando limiar ajustado em desenvolvimento. O JBL Tune 510BT e o 520BT permanecem modelos separados. A opção do formulário pode desligar a consulta ao catálogo.
 
-Não há banco de dados, IA, embeddings, similaridade calculada nem métricas de avaliação nesta integração. `backend/demo_market.py` é o ponto a substituir pelo serviço de matching futuro. Não se infere crescimento de vendas nem demanda a partir dos gráficos.
+O matching é uma linha de base TF-IDF, não Sentence Transformers nem o código exportado do Colab: esse script não veio no clone local. A avaliação disponível está em `docs/matching_avaliacao.md`; a amostra de teste tem poucos pares negativos, então a precisão deve ser lida com essa limitação. Não se infere crescimento de vendas nem demanda a partir dos gráficos.
 
 ## Publicar
 

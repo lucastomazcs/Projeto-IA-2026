@@ -12,7 +12,7 @@ elements['product-form'].events.submit({preventDefault(){}});
 const target = new URL(destination);
 assert.equal(target.origin,'http://localhost:8501');
 assert.equal(target.searchParams.get('product'),'JBL Tune 510BT');
-assert.equal(target.searchParams.get('category'),'Áudio e fones');
+assert.equal(target.searchParams.get('category'),'Fones de ouvido');
 assert.equal(target.searchParams.get('cost'),'120');
 assert.equal(target.searchParams.get('analisar'),'1');
 destination=undefined;

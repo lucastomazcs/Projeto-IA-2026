@@ -2,7 +2,7 @@
 const form = document.querySelector('#product-form');
 const status = document.querySelector('#preview-status');
 document.querySelector('#fill-example').addEventListener('click', () => {
-  const example = {product: 'JBL Tune 510BT', category: 'Áudio e fones', condition: 'Novo', cost: '120', shipping: '15', fees: '12', margin: '20'};
+  const example = {product: 'JBL Tune 510BT', category: 'Fones de ouvido', condition: 'Novo', cost: '120', shipping: '15', fees: '12', margin: '20'};
   for (const [id, value] of Object.entries(example)) document.getElementById(id).value = value;
   status.textContent = 'Formulário preenchido com um exemplo de demonstração.';
 });

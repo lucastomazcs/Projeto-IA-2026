@@ -8,18 +8,19 @@ Combinar custos do vendedor, taxas do canal e preços comparáveis para apresent
 
 ## Estado atual
 
-`streamlit_app.py` integra a apresentação comercial original do Precifica, a imagem, o formulário e os resultados em uma única experiência. **Prever preço** atualiza as métricas e gráficos abaixo do formulário. Os anúncios são exemplos fictícios; banco de dados e IA serão integrados depois.
+`streamlit_app.py` integra a apresentação comercial original do Precifica, a imagem, o formulário e os resultados em uma única experiência. **Prever preço** consulta os CSVs do catálogo, distingue modelos e atualiza métricas e gráficos abaixo do formulário. Os dados são sintéticos e fazem parte da demonstração.
 
-Para atender ao requisito acadêmico de IA essencial, a PoC deverá incluir uma tarefa de IA claramente delimitada — identificar e ranquear anúncios comparáveis a partir de título, marca, modelo e atributos — e avaliar essa tarefa com dados rotulados e uma linha de base simples. O cálculo financeiro continuará determinístico e auditável.
+O backend inclui uma linha de base de matching com TF-IDF de palavras e n-gramas de caracteres, similaridade de cosseno, limiar escolhido na divisão de desenvolvimento e teste separado por produto. A seleção do produto usa também marca, modelo e categoria do catálogo para evitar que modelos próximos sejam confundidos. O cálculo financeiro continua determinístico e auditável. O módulo original exportado do Colab não está neste clone; a implementação atual é uma linha de base reproduzível a partir dos CSVs fornecidos, não uma importação literal daquele notebook.
 
 ## Estrutura
 
 - `backend/`: API e lógica da PoC.
+- `data/sample/`: 492 anúncios, catálogo com 41 modelos e 3.483 pares rotulados.
 - `frontend/`: protótipo responsivo em HTML, CSS e JavaScript, com apresentação e tela de precificação.
 - `streamlit_app.py`: formulário Python, métricas e gráficos Plotly.
 - `tests/`: testes financeiros, de parâmetros, do handoff e da aplicação Streamlit.
 - `docs/`: requisitos, decisões e avaliação do plano.
-- `data/sample/`: dados sintéticos ou com licença de uso documentada.
+- `docs/matching_avaliacao.md`: protocolo, limiar e métricas por produto.
 
 ## Princípios de escopo
 
@@ -63,9 +64,9 @@ python backend/pricing.py
 ## Próximos passos
 
 1. Confirmar o recorte do problema e o público piloto com vendedores.
-2. Definir e validar a tarefa de IA de comparação de produtos.
-3. Definir os dados permitidos e um protocolo de avaliação.
-4. Construir a PoC demonstrável e registrar resultados, limitações e riscos.
+2. Substituir ou complementar a linha de base quando o código original do Colab e o modelo Sentence Transformers estiverem disponíveis.
+3. Ampliar e balancear os pares de teste antes de tratar as métricas como evidência robusta.
+4. Validar o catálogo com anúncios reais obtidos por fonte permitida e registrar limitações e riscos.
 
 ## Disciplina
 

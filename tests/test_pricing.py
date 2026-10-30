@@ -1,7 +1,6 @@
 import math
 import unittest
 
-from backend.demo_market import get_demo_comparables
 from backend.input_params import parse_initial_values
 from backend.pricing import calculate_minimum_price, recommend_price
 
@@ -39,11 +38,6 @@ class PricingTests(unittest.TestCase):
                 calculate_minimum_price(*args)
         with self.assertRaises(ValueError):
             recommend_price(100, 0, 0.1, 0.2, [math.nan])
-
-    def test_nearby_model_and_used_condition_are_not_equivalent(self):
-        self.assertEqual(get_demo_comparables("JBL Tune 520BT", "Áudio e fones", "Novo"), [])
-        self.assertEqual(get_demo_comparables("JBL Tune 510BT", "Áudio e fones", "Usado"), [])
-        self.assertEqual(len(get_demo_comparables("JBL Tune 510BT", "Áudio e fones", "Novo")), 3)
 
     def test_url_values_are_validated(self):
         values, errors = parse_initial_values({"product":"JBL Tune 510BT", "cost":"120,50", "fees":"12"})

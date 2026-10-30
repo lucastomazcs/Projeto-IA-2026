@@ -1,0 +1,42 @@
+﻿produto_id,categoria,marca,modelo,variante,preco_referencia_ficticio_brl,qtd_anuncios
+P001,Fones de ouvido,JBL,Tune 520BT,Preto,249.9,12
+P002,Fones de ouvido,JBL,Tune 510BT,Preto,199.9,12
+P003,Fones de ouvido,Sony,WH-CH520,Preto,289.9,12
+P004,Fones de ouvido,Sony,WH-CH720N,Preto,599.9,12
+P005,Fones de ouvido,Samsung,Galaxy Buds FE,Grafite,399.9,12
+P006,Fones de ouvido,Samsung,Galaxy Buds2 Pro,Grafite,749.9,12
+P007,Mouses,Logitech,M185,Cinza,79.9,12
+P008,Mouses,Logitech,M170,Preto,69.9,12
+P009,Mouses,Logitech,G203 LIGHTSYNC,Preto,159.9,12
+P010,Mouses,Logitech,G305 LIGHTSPEED,Preto,299.9,12
+P011,Teclados,Logitech,K120,Preto,69.9,12
+P012,Teclados,Logitech,K380,Grafite,229.9,12
+P013,Teclados,Redragon,Kumara K552,Preto,239.9,12
+P014,Teclados,Redragon,Fizz K617,Preto,209.9,12
+P015,Armazenamento,Kingston,NV2 500GB,500 GB,239.9,12
+P016,Armazenamento,Kingston,NV2 1TB,1 TB,399.9,12
+P017,Armazenamento,Samsung,970 EVO Plus 500GB,500 GB,369.9,12
+P018,Armazenamento,Samsung,970 EVO Plus 1TB,1 TB,619.9,12
+P019,Armazenamento,SanDisk,Ultra Flair 64GB,64 GB,59.9,12
+P020,Armazenamento,SanDisk,Ultra Flair 128GB,128 GB,89.9,12
+P021,Webcams,Logitech,C270,Preto,189.9,12
+P022,Webcams,Logitech,C920s Pro HD,Preto,449.9,12
+P023,Caixas de som,JBL,Go 3,Preto,249.9,12
+P024,Caixas de som,JBL,Go 4,Preto,329.9,12
+P025,Caixas de som,JBL,Flip 6,Preto,649.9,12
+P026,Smartphones,Samsung,Galaxy A15 128GB,Preto,999,12
+P027,Smartphones,Samsung,Galaxy A15 256GB,Preto,1199,12
+P028,Smartphones,Motorola,Moto G54 5G 128GB,Azul,1199,12
+P029,Smartphones,Motorola,Moto G54 5G 256GB,Azul,1399,12
+P030,Computadores desktop,Dell,OptiPlex 7010 i5 8GB 256GB SSD,Preto,2899,12
+P031,Computadores desktop,Dell,OptiPlex 7010 i5 16GB 512GB SSD,Preto,3399,12
+P032,Computadores desktop,Lenovo,ThinkCentre M70s i5 8GB 256GB SSD,Preto,3099,12
+P033,Computadores desktop,Lenovo,ThinkCentre M70s i5 16GB 512GB SSD,Preto,3599,12
+P034,Notebooks,Lenovo,IdeaPad 1 Ryzen 5 8GB 256GB SSD,Cinza,2499,12
+P035,Notebooks,Lenovo,IdeaPad 1 Ryzen 5 8GB 512GB SSD,Cinza,2799,12
+P036,Notebooks,Acer,Aspire 5 i5 8GB 256GB SSD,Prata,2999,12
+P037,Notebooks,Acer,Aspire 5 i5 16GB 512GB SSD,Prata,3599,12
+P038,Tablets,Samsung,Galaxy Tab A9 64GB Wi-Fi,Grafite,899,12
+P039,Tablets,Samsung,Galaxy Tab A9 128GB Wi-Fi,Grafite,1099,12
+P040,Tablets,Lenovo,Tab M10 64GB Wi-Fi,Cinza,999,12
+P041,Tablets,Lenovo,Tab M10 128GB Wi-Fi,Cinza,1199,12

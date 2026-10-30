@@ -2,9 +2,12 @@
 
 from math import isfinite
 
-CATEGORIES = ["Áudio e fones", "Smartphones", "Informática", "Outros eletrônicos"]
+CATEGORIES = [
+    "Armazenamento", "Caixas de som", "Computadores desktop", "Fones de ouvido",
+    "Mouses", "Notebooks", "Smartphones", "Tablets", "Teclados", "Webcams",
+]
 CONDITIONS = ["Novo", "Usado"]
-DEFAULTS = {"product": "JBL Tune 510BT", "category": CATEGORIES[0], "condition": "Novo", "cost": 120.0, "shipping": 15.0, "fixed_fee": 0.0, "fees": 12.0, "margin": 20.0}
+DEFAULTS = {"product": "JBL Tune 510BT", "category": "Fones de ouvido", "condition": "Novo", "cost": 120.0, "shipping": 15.0, "fixed_fee": 0.0, "fees": 12.0, "margin": 20.0}
 
 
 def parse_initial_values(params) -> tuple[dict, list[str]]:

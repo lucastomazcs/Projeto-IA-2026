@@ -3,8 +3,8 @@ import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
 
-from backend.demo_market import get_demo_comparables
 from backend.input_params import CATEGORIES, CONDITIONS, parse_initial_values
+from backend.product_matching import match_product
 from backend.pricing import calculate_minimum_price, recommend_price
 
 st.set_page_config(page_title="Precifica | Análise", page_icon="📊", layout="wide")
@@ -50,9 +50,9 @@ with hero_copy:
 <h1>Defina preços<br>que <strong>vendem melhor.</strong></h1>
 <p>Transforme dados de custos e anúncios comparáveis em decisões mais claras para o seu negócio.</p>
 <div class="hero-checks"><span>✓ Análise de mercado</span><span>✓ Margem em perspectiva</span><span>✓ Custos organizados</span><span>✓ Gráficos na mesma tela</span></div></div>""",unsafe_allow_html=True)
-    st.link_button("Começar agora　 →","#precificacao",type="primary",use_container_width=False)
+    st.link_button("Começar agora　 →","#precificacao",type="primary",width="content")
 with hero_image:
-    st.image("frontend/assets/empreendedora.png",use_container_width=True)
+    st.image("frontend/assets/empreendedora.png",width="stretch")
     st.markdown("""<div class="price-card"><small>PRÉVIA ILUSTRATIVA · JBL TUNE 510BT</small>
 <h3 style="margin:.35rem 0;color:#142543">R$ 199,90</h3><span style="color:#5575a5">Custos e margem apresentados na análise</span></div>""",unsafe_allow_html=True)
 st.markdown('<div id="beneficios"></div>',unsafe_allow_html=True)
@@ -65,7 +65,7 @@ for column,title,description in [(b1,"Entenda seus custos","Aquisição, frete, 
             st.caption(description)
 with st.expander("Como funciona"):
     st.markdown("1. Informe o produto e a condição.　 2. Inclua seus custos e a margem.　 3. Clique em **Prever preço** para atualizar métricas e gráficos aqui mesmo.")
-st.info("Demonstração acadêmica: cálculos reais e anúncios fictícios. O banco de produtos e a inteligência artificial serão integrados depois.")
+st.info("Demonstração acadêmica: cálculo financeiro e matching experimental sobre um catálogo CSV sintético. Não representa preços reais de mercado.")
 
 for message in st.session_state.initial_errors:
     st.warning(message)
@@ -83,8 +83,8 @@ with st.form("pricing_form"):
     fixed_fee = fixed_col.number_input("Tarifa fixa (R$)",min_value=0.0,max_value=1_000_000.0,step=0.5,key="fixed_fee")
     fees = fees_col.number_input("Taxas (%)",min_value=0.0,max_value=99.0,step=0.5,key="fees")
     margin = margin_col.number_input("Margem desejada (%)",min_value=0.0,max_value=99.0,step=0.5,key="margin")
-    use_demo = st.checkbox("Incluir anúncios de exemplo",value=True)
-    st.caption("Três anúncios ilustrativos estão disponíveis para JBL Tune 510BT · Áudio e fones · Novo.")
+    use_catalog = st.checkbox("Buscar no catálogo sintético (492 anúncios)",value=True)
+    st.caption("Catálogo acadêmico com 41 modelos e anúncios sintéticos em reais.")
     submitted = st.form_submit_button("Prever preço",type="primary",width="stretch")
 
 should_analyze = submitted or st.session_state.pop("auto_analyze",False)
@@ -95,9 +95,10 @@ if should_analyze:
     try:
         if not product.strip():
             raise ValueError("Informe o nome do produto.")
-        listings = get_demo_comparables(product,category,condition) if use_demo else []
+        match = match_product(product,category,condition) if use_catalog else {"product":None,"listings":[],"reason":"Busca no catálogo desativada."}
+        listings = match["listings"]
         result = recommend_price(cost+shipping,fixed_fee,fees/100,margin/100,[row["preco"] for row in listings])
-        st.session_state.analysis={"result":result,"listings":listings,"product":product,"cost":cost,"shipping":shipping,"fixed_fee":fixed_fee,"fees":fees,"margin":margin}
+        st.session_state.analysis={"result":result,"listings":listings,"product":product,"cost":cost,"shipping":shipping,"fixed_fee":fixed_fee,"fees":fees,"margin":margin,"match":match}
     except ValueError as exc:
         st.session_state.analysis_error=str(exc)
 
@@ -128,7 +129,8 @@ else:
         p1.metric("Lucro estimado por venda",money(profit))
         p2.metric("Margem sobre a venda",f"{profit/price*100:.1f}%".replace(".",","))
     elif not a["listings"]:
-        st.warning("Sem anúncios equivalentes neste exemplo. O preço mínimo considera custos e margem; não há recomendação de mercado.")
+        detail = a["match"].get("reason") or "Não há anúncios equivalentes para este produto e condição."
+        st.warning(f"{detail} O preço mínimo considera custos e margem; não há recomendação de mercado.")
     else:
         st.warning(result.explanation)
 
@@ -136,13 +138,15 @@ else:
     with market_tab:
         if a["listings"]:
             df=pd.DataFrame(a["listings"])
-            fig=go.Figure(go.Bar(x=df["loja"],y=df["preco"],name="Anúncios fictícios",marker_color="#7896bf",hovertemplate="%{x}<br>R$ %{y:.2f}<extra></extra>"))
+            fig=go.Figure(go.Bar(x=df["loja"],y=df["preco"],name="Anúncios sintéticos",marker_color="#7896bf",hovertemplate="%{x}<br>R$ %{y:.2f}<extra></extra>"))
             fig.add_hline(y=result.minimum_price,line_dash="dash",line_color="#c48444",annotation_text="Mínimo com margem",annotation_position="top left")
             if result.suggested_price is not None:
                 fig.add_hline(y=result.suggested_price,line_dash="dot",line_color="#315c9c",annotation_text="Sugestão: mediana",annotation_position="bottom right")
             fig.update_layout(yaxis_title="Preço (R$)",yaxis_rangemode="tozero")
             st.plotly_chart(chart_style(fig),width="stretch",key="market_chart")
-            st.dataframe(df.rename(columns={"titulo":"Anúncio","loja":"Loja","preco":"Preço (R$)","condicao":"Condição","fonte":"Fonte"}).drop(columns="id"),hide_index=True,width="stretch")
+            st.dataframe(df.assign(similaridade=df["similaridade"].map(lambda value:f"{value:.0%}"))
+                .rename(columns={"titulo":"Anúncio","loja":"Loja","preco":"Preço (R$)","condicao":"Condição","fonte":"Fonte","similaridade":"Similaridade"})
+                .drop(columns="id"),hide_index=True,width="stretch")
         else:
             st.info("A comparação será exibida quando houver anúncios equivalentes para este produto.")
     with cost_tab:
@@ -165,5 +169,5 @@ else:
     with st.expander("Como os resultados são calculados"):
         st.write("Preço mínimo = (produto + frete + tarifa fixa) / (1 − taxa percentual − margem). O valor é arredondado para cima ao centavo.")
         st.write("O preço sugerido é a mediana dos anúncios equivalentes, se atingir o preço mínimo. Caso contrário, a aplicação sinaliza inviabilidade.")
-        st.caption("Os anúncios atuais são exemplos fixos, sem IA ou pontuação de similaridade. O catálogo e o matching serão integrados depois.")
+        st.caption("A busca usa similaridade TF-IDF por cosseno calibrada em pares rotulados de desenvolvimento; modelos com códigos diferentes são bloqueados. A métrica de teste por produto está documentada em docs/matching_avaliacao.md.")
 

@@ -6,12 +6,12 @@
 <main>
 <div class="breadcrumb">Operação <span>/</span> Precificação</div>
 <div class="page-title"><div><h1>Nova precificação</h1><p>Compare o mercado e encontre um preço que faça sentido para sua venda.</p></div><button class="button secondary" id="reset" type="button">Limpar formulário</button></div>
-<div class="prototype-banner"><span class="info-icon">i</span><p><strong>Conectado ao Streamlit</strong> Envie seus custos para calcular resultados e visualizar gráficos. Os anúncios usados na demonstração são fictícios.</p><span class="prototype">Demonstração</span></div>
+<div class="prototype-banner"><span class="info-icon">i</span><p><strong>Conectado ao Streamlit</strong> Envie seus custos para consultar 492 anúncios sintéticos e visualizar cálculos e gráficos.</p><span class="prototype">Demonstração</span></div>
 <div class="layout">
 <section class="panel form-panel"><div class="panel-heading"><div><span class="section-kicker">CONFIGURAÇÃO</span><h2>Produto e custos</h2><p>Comece pelas informações da sua venda.</p></div><button id="fill-example" class="text-button" type="button">Usar exemplo</button></div>
 <form id="product-form">
 <label for="product">Nome do produto</label><input id="product" name="product" placeholder="Ex.: Fone JBL Tune 510BT" maxlength="120" required>
-<div class="form-row"><div><label for="category">Categoria</label><select id="category"><option>Áudio e fones</option><option>Smartphones</option><option>Informática</option><option>Outros eletrônicos</option></select></div><div><label for="condition">Condição</label><select id="condition"><option>Novo</option><option>Usado</option></select></div></div>
+<div class="form-row"><div><label for="category">Categoria</label><select id="category"><option>Fones de ouvido</option><option>Smartphones</option><option>Informática</option><option>Armazenamento</option><option>Caixas de som</option><option>Computadores desktop</option><option>Mouses</option><option>Notebooks</option><option>Tablets</option><option>Teclados</option><option>Webcams</option></select></div><div><label for="condition">Condição</label><select id="condition"><option>Novo</option><option>Usado</option></select></div></div>
 <hr><h3>Composição do preço <span>Valores em reais</span></h3>
 <label for="cost">Custo do produto</label><div class="affix"><span>R$</span><input id="cost" type="number" min="0" step="0.01" placeholder="0,00" required></div>
 <label for="shipping">Frete e outros custos</label><div class="affix"><span>R$</span><input id="shipping" type="number" min="0" step="0.01" placeholder="0,00" required></div>
@@ -34,5 +34,5 @@
 </div></div>
 <footer><span><strong>precifica</strong> <span class="footer-divider">|</span> Precificação de eletrônicos</span><span>Protótipo de interface · 2026</span></footer>
 </main>
-<dialog id="help-dialog"><div class="dialog-heading"><h2>Como funciona a precificação</h2><button id="help-close" type="button" aria-label="Fechar explicação">×</button></div><ol><li><strong>Informe o produto</strong><p>Preencha o modelo, a condição e a categoria.</p></li><li><strong>Defina seus custos</strong><p>Informe aquisição, frete, taxas e margem desejada.</p></li><li><strong>Calcule no Streamlit</strong><p>O botão envia os campos para a aplicação Python, que apresenta cálculos e gráficos interativos.</p></li></ol><p class="dialog-note">O Streamlit precisa estar em execução no endereço configurado. Os cartões desta página são apenas uma prévia; banco de dados e IA ainda serão integrados.</p></dialog>
+<dialog id="help-dialog"><div class="dialog-heading"><h2>Como funciona a precificação</h2><button id="help-close" type="button" aria-label="Fechar explicação">×</button></div><ol><li><strong>Informe o produto</strong><p>Preencha o modelo, a condição e a categoria.</p></li><li><strong>Defina seus custos</strong><p>Informe aquisição, frete, taxas e margem desejada.</p></li><li><strong>Calcule no Streamlit</strong><p>O botão envia os campos para a aplicação Python, que consulta o catálogo e apresenta cálculos e gráficos interativos.</p></li></ol><p class="dialog-note">O Streamlit precisa estar em execução no endereço configurado. Esta versão usa um catálogo sintético e uma linha de base de similaridade para demonstração.</p></dialog>
 <script src="config.js"></script><script src="app.js"></script></body></html>
