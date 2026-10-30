@@ -3,7 +3,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const files = {
   '/': 'index.html', '/index.html': 'index.html', '/app.html': 'app.html',
-  '/landing.css': 'landing.css', '/style.css': 'style.css', '/app.js': 'app.js',
+  '/landing.css': 'landing.css', '/style.css': 'style.css', '/app.js': 'app.js', '/config.js': 'config.js',
   '/assets/empreendedora.png': 'assets/empreendedora.png'
 };
 const mime = {html:'text/html; charset=utf-8', css:'text/css; charset=utf-8', js:'text/javascript; charset=utf-8', png:'image/png'};

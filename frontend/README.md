@@ -18,10 +18,10 @@ Acesse `http://127.0.0.1:4173`. Para encerrar o servidor, pressione Ctrl+C.
 - `app.html`, `style.css` e `app.js`: formulário de produto e custos, resultado ilustrativo e comparação de anúncios.
 - `assets/empreendedora.png`: imagem sintética gerada com Imagegen para o projeto.
 
-O botão **Começar precificação** abre o formulário. **Usar exemplo** preenche os campos com valores de demonstração. **Como funciona** abre uma explicação do fluxo. O layout se adapta a desktop e celular.
+O botão **Começar precificação** abre o formulário. **Usar exemplo** preenche os campos de demonstração. **Calcular no Streamlit** envia os dados à aplicação Python configurada em `config.js` (localmente, `http://localhost:8501/`). **Como funciona** abre uma explicação do fluxo. O layout se adapta a desktop e celular.
 
 ## Escopo
 
-Os anúncios, preços, margens e pontuações são exemplos fixos no HTML. O formulário demonstra a interação, sem calcular ou identificar produtos. Não há banco de dados, catálogo, histórico, exportação, armazenamento local, autenticação própria, integração com backend ou IA nesta etapa.
+Os cartões e anúncios no HTML continuam como uma prévia estática. Os cálculos reais e gráficos são apresentados no Streamlit, conectado a `backend/pricing.py`. Para executar os dois serviços e configurar um endereço publicado, consulte [docs/streamlit.md](../docs/streamlit.md). Não há integração com banco de dados ou IA nesta etapa.
 
 A imagem foi gerada com a ferramenta integrada Imagegen; o prompt está em `image-prompt.txt`. A pessoa retratada é sintética. O frontend usa identidade própria do Precifica.

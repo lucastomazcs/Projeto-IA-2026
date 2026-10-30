@@ -8,7 +8,7 @@ Combinar custos do vendedor, taxas do canal e preços comparáveis para apresent
 
 ## Estado atual
 
-O protótipo de frontend está disponível em `frontend/`, com página de apresentação comercial e tela de precificação. Os anúncios, preços e similaridades são exemplos fixos de interface; o frontend ainda não está integrado ao backend, a banco de dados ou a modelo de IA.
+O frontend comercial em `frontend/` envia produto e custos à aplicação `streamlit_app.py`. O Streamlit está conectado aos cálculos de `backend/pricing.py` e exibe métricas e gráficos interativos. Os anúncios ainda são fictícios; banco de dados e modelo de IA permanecem para uma etapa posterior. Os cartões do HTML continuam como prévia ilustrativa; os resultados calculados aparecem no Streamlit.
 
 Para atender ao requisito acadêmico de IA essencial, a PoC deverá incluir uma tarefa de IA claramente delimitada — identificar e ranquear anúncios comparáveis a partir de título, marca, modelo e atributos — e avaliar essa tarefa com dados rotulados e uma linha de base simples. O cálculo financeiro continuará determinístico e auditável.
 
@@ -16,6 +16,8 @@ Para atender ao requisito acadêmico de IA essencial, a PoC deverá incluir uma 
 
 - `backend/`: API e lógica da PoC.
 - `frontend/`: protótipo responsivo em HTML, CSS e JavaScript, com apresentação e tela de precificação.
+- `streamlit_app.py`: formulário Python, métricas e gráficos Plotly.
+- `tests/`: testes financeiros, de parâmetros, do handoff e da aplicação Streamlit.
 - `docs/`: requisitos, decisões e avaliação do plano.
 - `data/sample/`: dados sintéticos ou com licença de uso documentada.
 
@@ -31,7 +33,16 @@ Para atender ao requisito acadêmico de IA essencial, a PoC deverá incluir uma 
 
 ### Frontend
 
-Abra `frontend/index.html` no navegador. O botão **Começar precificação** leva à tela de exemplo em `frontend/app.html`.
+Instale as dependências e inicie o Streamlit (Python 3.10+):
+
+```bash
+python -m pip install -r requirements.txt
+python -m streamlit run streamlit_app.py
+```
+
+O Streamlit pode ser acessado diretamente em `http://localhost:8501`.
+
+O botão **Começar precificação** da página comercial leva ao formulário em `frontend/app.html`. Após preencher, **Calcular no Streamlit** envia os dados ao Streamlit. O destino está em `frontend/config.js`; configure uma URL HTTPS ao publicar o servidor Python.
 
 Para servir via HTTP, com Node.js e sem instalar dependências:
 
@@ -39,7 +50,7 @@ Para servir via HTTP, com Node.js e sem instalar dependências:
 node frontend/serve.cjs
 ```
 
-Acesse `http://127.0.0.1:4173`. Mais detalhes em [frontend/README.md](frontend/README.md).
+Acesse `http://127.0.0.1:4173`. Guia completo de execução, publicação e limites em [docs/streamlit.md](docs/streamlit.md).
 
 ### Backend inicial
 
