@@ -3,11 +3,13 @@ import unittest
 from backend.product_matching import (
     ADS_PATH,
     CATALOG_PATH,
+    MODEL_NAME,
     PAIRS_PATH,
     _read_csv,
-    _split_product_ids,
+    classify_pair,
     evaluate_threshold,
     match_product,
+    technical_incompatibility,
 )
 from backend.pricing import recommend_price
 
@@ -35,11 +37,18 @@ class ProductMatchingTests(unittest.TestCase):
 
     def test_threshold_is_tuned_and_tested_on_disjoint_product_sets(self):
         result = evaluate_threshold()
-        self.assertEqual(result["development_products"], 33)
-        self.assertEqual(result["test_products"], 8)
+        self.assertEqual(result["model"], MODEL_NAME)
+        self.assertEqual(result["development_products"], 28)
+        self.assertEqual(result["test_products"], 13)
         self.assertFalse(set(result["development_ids"]) & set(result["test_ids"]))
-        self.assertGreater(result["threshold"], 0)
-        self.assertGreater(result["test"]["f1"], 0.5)
+        self.assertEqual(result["threshold"], 0.33)
+        self.assertGreater(result["test"]["hybrid"]["f1"], 0.9)
+
+    def test_colab_hybrid_rules_block_different_models_and_capacities(self):
+        self.assertTrue(technical_incompatibility("JBL Tune 510BT", "JBL Tune 520BT"))
+        self.assertEqual(classify_pair("JBL Tune 510BT", "JBL Tune 520BT", 1.0, 0.33), 0)
+        self.assertTrue(technical_incompatibility("Galaxy A15 128GB", "Galaxy A15 256GB"))
+        self.assertEqual(classify_pair("JBL Tune 520BT Preto", "Headphone JBL 520 BT", 0.2, 0.33), 1)
 
     def test_matching_prices_feed_financial_recommendation(self):
         matching = match_product("JBL Tune 510BT", "Fones de ouvido", "Novo")

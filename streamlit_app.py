@@ -4,7 +4,7 @@ import plotly.graph_objects as go
 import streamlit as st
 
 from backend.input_params import CATEGORIES, CONDITIONS, parse_initial_values
-from backend.product_matching import match_product
+from backend.product_matching import MatchingModelError, match_product
 from backend.pricing import calculate_minimum_price, recommend_price
 
 st.set_page_config(page_title="Precifica | Análise", page_icon="📊", layout="wide")
@@ -84,7 +84,7 @@ with st.form("pricing_form"):
     fees = fees_col.number_input("Taxas (%)",min_value=0.0,max_value=99.0,step=0.5,key="fees")
     margin = margin_col.number_input("Margem desejada (%)",min_value=0.0,max_value=99.0,step=0.5,key="margin")
     use_catalog = st.checkbox("Buscar no catálogo sintético (492 anúncios)",value=True)
-    st.caption("Catálogo acadêmico com 41 modelos e anúncios sintéticos em reais.")
+    st.caption("Embeddings multilíngues MiniLM · catálogo acadêmico sintético · primeira execução baixa o modelo.")
     submitted = st.form_submit_button("Prever preço",type="primary",width="stretch")
 
 should_analyze = submitted or st.session_state.pop("auto_analyze",False)
@@ -100,6 +100,8 @@ if should_analyze:
         result = recommend_price(cost+shipping,fixed_fee,fees/100,margin/100,[row["preco"] for row in listings])
         st.session_state.analysis={"result":result,"listings":listings,"product":product,"cost":cost,"shipping":shipping,"fixed_fee":fixed_fee,"fees":fees,"margin":margin,"match":match}
     except ValueError as exc:
+        st.session_state.analysis_error=str(exc)
+    except MatchingModelError as exc:
         st.session_state.analysis_error=str(exc)
 
 if "analysis_error" in st.session_state:
@@ -169,5 +171,5 @@ else:
     with st.expander("Como os resultados são calculados"):
         st.write("Preço mínimo = (produto + frete + tarifa fixa) / (1 − taxa percentual − margem). O valor é arredondado para cima ao centavo.")
         st.write("O preço sugerido é a mediana dos anúncios equivalentes, se atingir o preço mínimo. Caso contrário, a aplicação sinaliza inviabilidade.")
-        st.caption("A busca usa similaridade TF-IDF por cosseno calibrada em pares rotulados de desenvolvimento; modelos com códigos diferentes são bloqueados. A métrica de teste por produto está documentada em docs/matching_avaliacao.md.")
+        st.caption("A busca usa Sentence Transformers e cosseno, com limiar calibrado em desenvolvimento e regras técnicas híbridas. As métricas do teste por produto estão em docs/matching_avaliacao.md.")
 

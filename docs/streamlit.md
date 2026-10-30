@@ -53,9 +53,9 @@ As alterações dos campos no Streamlit só atualizam o resultado após enviar o
 
 ## Dados e limitações
 
-Os anúncios sintéticos do arquivo `data/sample/anuncios.csv` estão ligados ao cálculo. O catálogo reúne 41 modelos e 492 anúncios. A interface identifica produtos por categoria, marca e modelo; a similaridade de títulos é calculada com TF-IDF e cosseno, usando limiar ajustado em desenvolvimento. O JBL Tune 510BT e o 520BT permanecem modelos separados. A opção do formulário pode desligar a consulta ao catálogo.
+Os anúncios sintéticos do arquivo `data/sample/anuncios.csv` estão ligados ao cálculo. O catálogo reúne 41 modelos e 492 anúncios. A interface identifica produtos por categoria, marca e modelo; os títulos são comparados com embeddings Sentence Transformers e cosseno, usando limiar ajustado em desenvolvimento. O JBL Tune 510BT e o 520BT permanecem modelos separados. A opção do formulário pode desligar a consulta ao catálogo.
 
-O matching é uma linha de base TF-IDF, não Sentence Transformers nem o código exportado do Colab: esse script não veio no clone local. A avaliação disponível está em `docs/matching_avaliacao.md`; a amostra de teste tem poucos pares negativos, então a precisão deve ser lida com essa limitação. Não se infere crescimento de vendas nem demanda a partir dos gráficos.
+O matching usa o Sentence Transformers multilíngue `paraphrase-multilingual-MiniLM-L12-v2`, adaptado do script exportado do Colab. A primeira análise baixa o modelo para o cache local do Hugging Face e pode demorar mais que as seguintes. A avaliação está em `docs/matching_avaliacao.md`; a amostra de teste tem poucos pares negativos, então a precisão deve ser lida com essa limitação. Não se infere crescimento de vendas nem demanda a partir dos gráficos.
 
 ## Publicar
 

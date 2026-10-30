@@ -21,7 +21,7 @@ O plano é uma proposta de solução, não uma instrução da disciplina. Ele su
 
 ## Ajuste recomendado
 
-Colocar uma tarefa de IA no caminho central do MVP: encontrar e ordenar anúncios de produtos realmente comparáveis com base em título e atributos (por exemplo, TF-IDF/cosseno como baseline e um método semântico ou classificador apenas se houver dados para validá-lo). A recomendação deve usar esses comparáveis aprovados, mas preservar o cálculo de margem como regra financeira transparente. Registrar uma amostra revisada manualmente, medir precisão/recall ou precisão no topo do ranking, comparar com baseline e mostrar quando a confiança/dados forem insuficientes. Não atribuir ao modelo previsões de venda ou ganho de margem sem experimento apropriado.
+A PoC agora coloca o matching no fluxo central: embeddings do Sentence Transformers multilíngue, limiar escolhido em desenvolvimento e verificações técnicas híbridas antes da comparação de preços. A avaliação atual está em [matching_avaliacao.md](matching_avaliacao.md). Próximos passos: ampliar pares negativos, revisar os rótulos com avaliadores e repetir o teste em anúncios de outras fontes. A recomendação financeira continua explícita e não atribui ao modelo previsões de venda ou ganho de margem.
 
 ## Sequência inicial sugerida
 

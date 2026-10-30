@@ -10,7 +10,7 @@ Combinar custos do vendedor, taxas do canal e preços comparáveis para apresent
 
 `streamlit_app.py` integra a apresentação comercial original do Precifica, a imagem, o formulário e os resultados em uma única experiência. **Prever preço** consulta os CSVs do catálogo, distingue modelos e atualiza métricas e gráficos abaixo do formulário. Os dados são sintéticos e fazem parte da demonstração.
 
-O backend inclui uma linha de base de matching com TF-IDF de palavras e n-gramas de caracteres, similaridade de cosseno, limiar escolhido na divisão de desenvolvimento e teste separado por produto. A seleção do produto usa também marca, modelo e categoria do catálogo para evitar que modelos próximos sejam confundidos. O cálculo financeiro continua determinístico e auditável. O módulo original exportado do Colab não está neste clone; a implementação atual é uma linha de base reproduzível a partir dos CSVs fornecidos, não uma importação literal daquele notebook.
+O backend usa Sentence Transformers (`paraphrase-multilingual-MiniLM-L12-v2`) para gerar embeddings e similaridade por cosseno, com limiar escolhido apenas no conjunto de desenvolvimento. A divisão é feita por produto, como no notebook Colab. Regras híbridas de modelo e capacidade evitam confusões técnicas; o cálculo financeiro continua determinístico e auditável. A implementação reutilizável foi adaptada do arquivo exportado do Colab, removendo células exploratórias e comandos próprios de notebook.
 
 ## Estrutura
 
@@ -73,9 +73,8 @@ python backend/pricing.py
 ## Próximos passos
 
 1. Confirmar o recorte do problema e o público piloto com vendedores.
-2. Substituir ou complementar a linha de base quando o código original do Colab e o modelo Sentence Transformers estiverem disponíveis.
-3. Ampliar e balancear os pares de teste antes de tratar as métricas como evidência robusta.
-4. Validar o catálogo com anúncios reais obtidos por fonte permitida e registrar limitações e riscos.
+2. Ampliar e balancear os pares de teste antes de tratar as métricas como evidência robusta.
+3. Validar o catálogo com anúncios reais obtidos por fonte permitida e registrar limitações e riscos.
 
 ## Disciplina
 

@@ -22,6 +22,6 @@ O botão **Começar precificação** abre o formulário. **Usar exemplo** preenc
 
 ## Escopo
 
-Os cartões e anúncios no HTML continuam como uma prévia estática. Os cálculos e o matching TF-IDF/cosseno são executados no Streamlit, com os dados CSV locais em `data/sample/`. O catálogo ainda é sintético e não usa banco de dados de produção ou o modelo do notebook Colab. Para executar os serviços e configurar um endereço publicado, consulte [docs/streamlit.md](../docs/streamlit.md).
+Os cartões e anúncios no HTML continuam como uma prévia estática. Os cálculos e o matching Sentence Transformers/cosseno são executados no Streamlit, com os dados CSV locais em `data/sample/`. O catálogo ainda é sintético e não usa banco de dados de produção. Para executar os serviços e configurar um endereço publicado, consulte [docs/streamlit.md](../docs/streamlit.md).
 
 A imagem foi gerada com a ferramenta integrada Imagegen; o prompt está em `image-prompt.txt`. A pessoa retratada é sintética. O frontend usa identidade própria do Precifica.
