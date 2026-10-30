@@ -2,9 +2,9 @@
 
 ## Fluxo
 
-`streamlit_app.py` reúne a apresentação, o formulário e os gráficos em uma única página. O fluxo é: formulário → **Prever preço** → métricas e gráficos abaixo do formulário.
+`streamlit_app.py` integra a apresentação comercial original, a imagem, o formulário e os gráficos na mesma página. O fluxo é: apresentação → **Começar agora** → custos → **Prever preço** → resultados abaixo do formulário.
 
-O formulário do Streamlit executa a previsão na mesma página e preserva os campos. A landing page HTML em `frontend/index.html` continua disponível como uma entrada visual opcional; o formulário integrado e os resultados ficam juntos na aplicação Streamlit.
+O formulário do Streamlit executa a previsão na mesma página e preserva os campos. `frontend/index.html` e os demais arquivos originais permanecem no repositório. A aplicação Streamlit exibe a identidade comercial original em seu próprio fluxo integrado.
 
 Os cálculos e gráficos são executados pelo Streamlit com `backend/pricing.py`. O estado da última análise fica na sessão enquanto o usuário atualiza os campos e prevê novamente.
 
@@ -30,13 +30,13 @@ Linux / macOS:
 .venv/bin/python -m streamlit run streamlit_app.py
 ```
 
-O Streamlit fica em `http://localhost:8501`. Preencha o formulário e selecione **Prever preço**. Resultado, comparação e gráficos são renderizados abaixo do formulário na mesma página. A landing page opcional fica em `http://127.0.0.1:4173`:
+O Streamlit fica em `http://localhost:8501`. Use **Começar agora**, preencha o formulário e selecione **Prever preço**. Resultado, comparação e gráficos aparecem abaixo do formulário, na mesma página.
 
 ```bash
 node frontend/serve.cjs
 ```
 
-Abra `http://127.0.0.1:4173` para a apresentação ou `http://localhost:8501` para o fluxo integrado de previsão.
+Abra `http://localhost:8501` para a experiência integrada.
 
 ## Resultados
 

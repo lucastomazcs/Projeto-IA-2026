@@ -16,6 +16,14 @@ st.html("""<style>
 .hero small{letter-spacing:1.4px;color:#5575a5;font-weight:600}
 .hero h2{font-size:2rem;color:#142543;margin:.55rem 0}
 .hero p{color:#697b95;margin:0}
+.navline{display:flex;justify-content:space-between;border-bottom:1px solid #e1e6ee;padding:8px 0 16px;margin-bottom:16px;color:#53627a;font-size:.9rem}
+.navline a{color:#315c9c;text-decoration:none;font-weight:600}
+.hero-copy{padding:24px 8px 20px 0}
+.hero-copy h1{font-size:clamp(2.5rem,4.4vw,4rem);line-height:1.12;letter-spacing:-2px;color:#142543;margin:.65rem 0 1rem}
+.hero-copy h1 strong{font-weight:750}
+.hero-checks{display:grid;grid-template-columns:1fr 1fr;gap:8px;color:#52637c;font-size:.88rem;padding:15px 0 20px}
+.price-card{background:#fffffff0;border:1px solid #dce5f1;border-radius:10px;padding:16px 19px;margin-top:-100px;position:relative;max-width:410px;box-shadow:0 12px 34px #1c37601a}
+.benefit-card{height:100%;background:white;border:1px solid #e1e6ee;border-radius:8px;padding:19px}
 </style>""")
 
 def money(value):
@@ -35,18 +43,35 @@ if "initialized" not in st.session_state:
     st.session_state.auto_analyze = st.query_params.get("analisar") == "1" and not errors
     st.session_state.initialized = True
 
-st.markdown("""<section class="hero"><small>PRECIFICAÇÃO DE ELETRÔNICOS</small>
-<h2>Defina preços com mais segurança.</h2>
-<p>Informe seus custos, compare anúncios de referência e veja a prévia da sua operação nesta tela.</p></section>""",unsafe_allow_html=True)
-st.caption("Projeto acadêmico · Protótipo integrado")
-st.info("Os cálculos financeiros são executados ao prever. Os anúncios de exemplo são fictícios; banco de produtos e IA serão integrados depois.")
-with st.expander("Como funciona",expanded=False):
-    st.markdown("1. Informe produto e custos.  2. Clique em **Prever preço**.  3. Confira métricas e gráficos que aparecem logo abaixo.")
+st.markdown('<div class="navline"><span><strong>precifica</strong>　 ·　 Precificação inteligente</span><a href="#precificacao">COMEÇAR AGORA　 →</a></div>',unsafe_allow_html=True)
+hero_copy,hero_image=st.columns([1,1],gap="large",vertical_alignment="center")
+with hero_copy:
+    st.markdown("""<div class="hero-copy"><small>PRECIFICAÇÃO DE ELETRÔNICOS</small>
+<h1>Defina preços<br>que <strong>vendem melhor.</strong></h1>
+<p>Transforme dados de custos e anúncios comparáveis em decisões mais claras para o seu negócio.</p>
+<div class="hero-checks"><span>✓ Análise de mercado</span><span>✓ Margem em perspectiva</span><span>✓ Custos organizados</span><span>✓ Gráficos na mesma tela</span></div></div>""",unsafe_allow_html=True)
+    st.link_button("Começar agora　 →","#precificacao",type="primary",use_container_width=False)
+with hero_image:
+    st.image("frontend/assets/empreendedora.png",use_container_width=True)
+    st.markdown("""<div class="price-card"><small>PRÉVIA ILUSTRATIVA · JBL TUNE 510BT</small>
+<h3 style="margin:.35rem 0;color:#142543">R$ 199,90</h3><span style="color:#5575a5">Custos e margem apresentados na análise</span></div>""",unsafe_allow_html=True)
+st.markdown('<div id="beneficios"></div>',unsafe_allow_html=True)
+st.subheader("Um bom preço considera mais do que a concorrência")
+b1,b2,b3=st.columns(3)
+for column,title,description in [(b1,"Entenda seus custos","Aquisição, frete, taxas de venda e margem."),(b2,"Compare o produto certo","Veja anúncios equivalentes e diferencie modelos parecidos."),(b3,"Enxergue sua margem","Acompanhe preço mínimo, lucro e composição da venda.")]:
+    with column:
+        with st.container(border=True):
+            st.markdown(f"**{title}**")
+            st.caption(description)
+with st.expander("Como funciona"):
+    st.markdown("1. Informe o produto e a condição.　 2. Inclua seus custos e a margem.　 3. Clique em **Prever preço** para atualizar métricas e gráficos aqui mesmo.")
+st.info("Demonstração acadêmica: cálculos reais e anúncios fictícios. O banco de produtos e a inteligência artificial serão integrados depois.")
 
 for message in st.session_state.initial_errors:
     st.warning(message)
 
-st.subheader("Produto e custos")
+st.markdown('<div id="precificacao"></div>',unsafe_allow_html=True)
+st.subheader("Comece sua precificação")
 with st.form("pricing_form"):
     row1 = st.columns([2,1,1])
     product = row1[0].text_input("Nome do produto",key="product",max_chars=120)
